@@ -50,6 +50,23 @@ return [
         ],
     ],
     'defaults' => [
+        'swagger' => [
+            'info' => [
+                'title' => 'Employee Management API',
+                'version' => '1.0.0',
+                'description' => 'A Laravel-based API for managing employee data. This API supports full CRUD operations for employees, including their details, department management, and security best practices using API key authentication.',
+                'contact' => [
+                    'email' => 'smazoomder@gmail.com',
+                ],
+            ],
+            'securitySchemes' => [
+                'api_key' => [
+                    'type' => 'apiKey',
+                    'in' => 'header',
+                    'name' => 'X-API-KEY',
+                ],
+            ],
+        ],
         'routes' => [
             /*
              * Route for accessing parsed swagger annotations.

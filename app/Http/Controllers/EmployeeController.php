@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
  *     )
  * )
  * 
+ * @OA\SecurityRequirement(name="api_key")
  * @OA\SecurityScheme(
  *     securityScheme="api_key",
  *     type="apiKey",
@@ -34,6 +35,7 @@ class EmployeeController extends Controller
      *     description="Returns a paginated list of employees with their details",
      *     operationId="getEmployees",
      *     tags={"Employees"},
+     *     security={{"api_key":{}}},
      *     @OA\Parameter(
      *         name="paginate",
      *         in="query",
@@ -100,6 +102,7 @@ class EmployeeController extends Controller
      *     path="/api/employees",
      *     summary="Create a new employee",
      *     tags={"Employees"},
+     *     security={{"api_key":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\MediaType(
@@ -192,6 +195,7 @@ class EmployeeController extends Controller
      *     description="Fetch an employee's information along with their details using their unique ID.",
      *     operationId="getEmployeeById",
      *     tags={"Employees"},
+     *     security={{"api_key":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -254,6 +258,7 @@ class EmployeeController extends Controller
      *     description="Update the employee's basic information and details (if present)",
      *     operationId="updateEmployee",
      *     tags={"Employees"},
+     *     security={{"api_key":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -343,6 +348,7 @@ class EmployeeController extends Controller
      *     description="Delete an employee and their associated details using their unique ID.",
      *     operationId="deleteEmployee",
      *     tags={"Employees"},
+     *     security={{"api_key":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
