@@ -1,0 +1,703 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Employee Management API",
+        "description": "A Laravel-based API for managing employee data. This API supports full CRUD operations for employees, including their details, department management, and security best practices using API key authentication.",
+        "contact": {
+            "email": "smazoomder@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/employees": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Get a list of employees with pagination",
+                "description": "Returns a paginated list of employees with their details",
+                "operationId": "getEmployees",
+                "parameters": [
+                    {
+                        "name": "paginate",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A paginated list of employees",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "current_page": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 5523
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Mrs. Idell Stehr"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "jada.raynor@bayer.org"
+                                                    },
+                                                    "department_id": {
+                                                        "type": "integer",
+                                                        "example": 6
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2025-05-05T14:43:59.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2025-05-05T14:43:59.000000Z"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "example": null,
+                                                        "nullable": true
+                                                    },
+                                                    "detail": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": null
+                                                            },
+                                                            "employee_id": {
+                                                                "type": "string",
+                                                                "example": null
+                                                            },
+                                                            "designation": {
+                                                                "type": "string",
+                                                                "example": null
+                                                            },
+                                                            "salary": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": null
+                                                            },
+                                                            "address": {
+                                                                "type": "string",
+                                                                "example": null
+                                                            },
+                                                            "joined_date": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": null
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": null
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string",
+                                                                "format": "date-time",
+                                                                "example": null
+                                                            }
+                                                        },
+                                                        "type": "object",
+                                                        "nullable": true
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "first_page_url": {
+                                            "type": "string",
+                                            "example": "http://localhost:8000/api/employees?page=1"
+                                        },
+                                        "last_page_url": {
+                                            "type": "string",
+                                            "example": "http://localhost:8000/api/employees?page=1500"
+                                        },
+                                        "next_page_url": {
+                                            "type": "string",
+                                            "example": "http://localhost:8000/api/employees?page=2"
+                                        },
+                                        "prev_page_url": {
+                                            "type": "string",
+                                            "example": null,
+                                            "nullable": true
+                                        },
+                                        "to": {
+                                            "type": "integer",
+                                            "example": 10
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 15000
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid page number or other request issues",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Create a new employee",
+                "operationId": "bfad4edec29b0edbd684a0afbd847510",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "department_id",
+                                    "designation",
+                                    "salary",
+                                    "address",
+                                    "joined_date"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "department_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "designation": {
+                                        "type": "string",
+                                        "example": "Software Engineer"
+                                    },
+                                    "salary": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 7500
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "123 Main St, Springfield, IL"
+                                    },
+                                    "joined_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-05-05"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Employee created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "John Doe"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "format": "email",
+                                            "example": "john.doe@example.com"
+                                        },
+                                        "department_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "id": {
+                                            "type": "string",
+                                            "example": "afb2475a-459d-43bf-88cd-748c0f2b60c9"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-05-05T15:08:29.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-05-05T15:08:29.000000Z"
+                                        },
+                                        "detail": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 15001
+                                                },
+                                                "employee_id": {
+                                                    "type": "string",
+                                                    "example": "afb2475a-459d-43bf-88cd-748c0f2b60c9"
+                                                },
+                                                "designation": {
+                                                    "type": "string",
+                                                    "example": "Software Engineer"
+                                                },
+                                                "salary": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 7500
+                                                },
+                                                "address": {
+                                                    "type": "string",
+                                                    "example": "123 Main St, Springfield, IL"
+                                                },
+                                                "joined_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2025-05-05"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-05-05T15:08:29.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-05-05T15:08:29.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/employees/{id}": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Get employee by ID",
+                "description": "Fetch an employee's information along with their details using their unique ID.",
+                "operationId": "getEmployeeById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the employee",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Employee details fetched successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "format": "uuid",
+                                            "example": "00061be2-ea73-469d-b0ba-c371bcf9183f"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Ms. Leda Ankunding V"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "chanel.ryan@barton.com"
+                                        },
+                                        "department_id": {
+                                            "type": "integer",
+                                            "example": 9
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-05-05T14:43:56.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-05-05T14:43:56.000000Z"
+                                        },
+                                        "deleted_at": {
+                                            "type": "string",
+                                            "example": "null",
+                                            "nullable": true
+                                        },
+                                        "detail": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 55
+                                                },
+                                                "employee_id": {
+                                                    "type": "string",
+                                                    "format": "uuid",
+                                                    "example": "00061be2-ea73-469d-b0ba-c371bcf9183f"
+                                                },
+                                                "designation": {
+                                                    "type": "string",
+                                                    "example": "Event Planner"
+                                                },
+                                                "salary": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 7746.84
+                                                },
+                                                "address": {
+                                                    "type": "string",
+                                                    "example": "7241 Reichert Manors Apt. 741\\nChristineview, AZ 20846-3087"
+                                                },
+                                                "joined_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "1995-05-15"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-05-05T14:43:56.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-05-05T14:43:56.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Employee not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Employee not found."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Update an existing employee",
+                "description": "Update the employee's basic information and details (if present)",
+                "operationId": "updateEmployee",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the employee to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "00005523-d4c2-4845-a3b0-f88fb8164f4a"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Employee data to be updated",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Mrs. Idell Stehr"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "jada.raynor@bayer.org"
+                                    },
+                                    "department_id": {
+                                        "type": "integer",
+                                        "example": 6
+                                    },
+                                    "designation": {
+                                        "type": "string",
+                                        "example": "Manager"
+                                    },
+                                    "salary": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 45000
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "123 Street, City"
+                                    },
+                                    "joined_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-01-01"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated the employee",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "5523"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Mrs. Idell Stehr"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "jada.raynor@bayer.org"
+                                        },
+                                        "department_id": {
+                                            "type": "integer",
+                                            "example": 6
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-05-05T14:43:59.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-05-05T14:43:59.000000Z"
+                                        },
+                                        "deleted_at": {
+                                            "type": "string",
+                                            "example": null,
+                                            "nullable": true
+                                        },
+                                        "detail": {
+                                            "properties": {
+                                                "employee_id": {
+                                                    "type": "string",
+                                                    "example": "5523"
+                                                },
+                                                "designation": {
+                                                    "type": "string",
+                                                    "example": "Manager"
+                                                },
+                                                "salary": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 45000
+                                                },
+                                                "address": {
+                                                    "type": "string",
+                                                    "example": "123 Street, City"
+                                                },
+                                                "joined_date": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2025-01-01"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-05-05T14:43:59.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2025-05-05T14:43:59.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data or invalid employee ID",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Bad Request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Employee not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Employee not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Delete an employee by ID",
+                "description": "Delete an employee and their associated details using their unique ID.",
+                "operationId": "deleteEmployee",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the employee to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Employee successfully deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Employee deleted."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Employee not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Employee not found."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "name": "X-API-KEY",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Employees",
+            "description": "Employees"
+        }
+    ]
+}
