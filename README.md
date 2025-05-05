@@ -9,7 +9,7 @@
 
 ## Answered Assesment
 
--   answered all with precision except I could not finish IV. Admin Dashboard (Using Vue.js) 1x30 = 30 Marks
+-   answered all with precision except I could not finish, partially completing IV. Admin Dashboard (Using Vue.js) 1x30 = 30 Marks
 
 ## ✔️ Completed Sections
 
@@ -25,7 +25,7 @@
 
 -   Inserted:
     -   10 departments
-    -   100,000 fake employees with corresponding details using factories and seeders
+    -   100,000 fake employees with corresponding details using factories and seeders [With Chunking to handle large data]
 
 ### III. Employee Management APIs – 30 Marks
 
