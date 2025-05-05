@@ -7,6 +7,10 @@ use App\Models\Employee;
 use App\Models\Department;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use ShaonMajumder\Facades\CacheHelper;
+use Illuminate\Support\Facades\Redis;
+
+
 
 /**
  * @OA\Info(
@@ -247,7 +251,13 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $employee = Employee::with(['department', 'detail'])->findOrFail($id);
+        $redisKey = CacheHelper::getCacheKey('employee-' . $id);
+        $employee = CacheHelper::getCache($redisKey);
+        if (empty($employee)) {
+            $employee = Employee::with(['department', 'detail'])->findOrFail($id);
+            CacheHelper::setCache($redisKey, $employee, 60); // Cache for 60 minutes
+        }
+
         return response()->json($employee);
     }
 
@@ -334,12 +344,14 @@ class EmployeeController extends Controller
             $employee->detail->update($request->only('designation', 'salary', 'address', 'joined_date'));
         }
 
+        $redisKey = CacheHelper::getCacheKey('employee-' . $id);
+        CacheHelper::delCache($redisKey);
+
         return response()->json([
             'message' => 'Employee updated successfully!',
             'data' => $employee->load('detail'),
         ]);
     }
-
 
     /**
      * @OA\Delete(

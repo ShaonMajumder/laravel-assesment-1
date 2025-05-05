@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('employees')->middleware([ApiKeyAuth::class])->group(function () {
+Route::prefix('employees')->middleware([ApiKeyAuth::class, 'throttle:employee-api'])->group(function () {
     Route::get('/', [EmployeeController::class, 'index']);
     Route::post('/', [EmployeeController::class, 'store']);
     Route::get('{id}', [EmployeeController::class, 'show']);

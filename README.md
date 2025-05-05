@@ -12,6 +12,7 @@
 -   API Documentation
 -   Database Optimization - Indexing
 -   Query Optimization - Eager loading
+-   Throatling by ip per minute
 
 ## contact
 
