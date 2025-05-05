@@ -10,6 +10,8 @@
 -   Efficient
 -   SECURE
 -   API Documentation
+-   Database Optimization - Indexing
+-   Query Optimization - Eager loading
 
 ## contact
 

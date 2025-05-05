@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "adf269c5a8a3a8306833c0b34e4eea4d",
+    "content-hash": "52743b8837113b51e0c2dc6d02a124bd",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3214,6 +3214,54 @@
                 }
             ],
             "time": "2021-09-25T23:10:38+00:00"
+        },
+        {
+            "name": "shaonmajumder/caching",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ShaonMajumder/caching.git",
+                "reference": "015a2c33e898a447c29134053586db07d38edc82"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ShaonMajumder/caching/zipball/015a2c33e898a447c29134053586db07d38edc82",
+                "reference": "015a2c33e898a447c29134053586db07d38edc82",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "ShaonMajumder\\Facades\\CacheHelper": "ShaonMajumder\\Caching\\Facades\\CacheHelperFacade"
+                    },
+                    "providers": [
+                        "ShaonMajumder\\Caching\\Providers\\CacheHelperServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ShaonMajumder\\Caching\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shaon Majumder",
+                    "email": "smazoomder@gmail.com"
+                }
+            ],
+            "description": "A Laravel caching helper library",
+            "support": {
+                "issues": "https://github.com/ShaonMajumder/caching/issues",
+                "source": "https://github.com/ShaonMajumder/caching/tree/main"
+            },
+            "time": "2025-04-24T07:12:46+00:00"
         },
         {
             "name": "swagger-api/swagger-ui",
@@ -8189,7 +8237,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "shaonmajumder/caching": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
