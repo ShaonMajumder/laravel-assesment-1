@@ -38,7 +38,16 @@ RUN [ -d /var/www/html/storage ] && chown -R www-data:www-data /var/www/html/sto
 # 0.484
 # 0.484   git config --global --add safe.directory /var/www/html
 
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader \
+# RUN composer install --no-interaction --prefer-dist --optimize-autoloader \
+#     && composer dump-autoload -o \
+#     && php artisan package:discover
+RUN if [ ! -f artisan ]; then \
+    echo "Laravel not found. Creating in temp folder..."; \
+    composer create-project --prefer-dist laravel/laravel /tmp/laravel; \
+    cp -R /tmp/laravel/. .; \
+    rm -rf /tmp/laravel; \
+    fi \
+    && composer install --no-interaction --prefer-dist --optimize-autoloader \
     && composer dump-autoload -o \
     && php artisan package:discover
 
